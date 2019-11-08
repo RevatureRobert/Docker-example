@@ -1,0 +1,41 @@
+version: '2.1'
+
+services:
+  movie-queue:
+    build: ./Movies-AWS-Queue
+    ports:
+      - 9000:10122
+  movie-config-server:
+    build: ./Movies-Configuration-Server
+    ports:
+      - 9090:9090
+  movie-config-client:
+    build: ./Movies-Configuration-Client
+    ports:
+      - 9091:9091
+      - 9091:9061
+    depends_on: movie-config-server
+  movie-eureka:
+    build: ./Movies-Eureka
+    ports:
+      - 8761:8761
+  movie-zuul:
+    build: ./Movie-Gateway
+    ports:
+      - 8765:8765
+    depends_on: movie-eureka
+  movie-horror:
+    build: ./Movie-Horror
+    ports:
+      - 8000:8000
+    depends_on: movie_eureka
+  movie-romance:
+    build: ./Movies-Romance
+    ports:
+      - 8001:8001
+    depends_on: movie-eureka
+  movie-scifi:
+    build: ./Movie-scifi
+    ports:
+      - 8002:8002
+    depends_on: movie-eureka
