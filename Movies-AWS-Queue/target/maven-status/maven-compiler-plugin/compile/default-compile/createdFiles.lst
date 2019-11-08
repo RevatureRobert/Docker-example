@@ -1,0 +1,3 @@
+com\example\service\QueueService.class
+com\example\controller\QueueController.class
+com\example\MoviesAwsQueueApplication.class
